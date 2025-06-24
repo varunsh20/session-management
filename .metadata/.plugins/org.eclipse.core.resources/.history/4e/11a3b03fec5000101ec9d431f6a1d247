@@ -1,0 +1,44 @@
+package com.session.concurrency.copy;
+
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.PriorityBlockingQueue;
+
+public class LogProcessor {
+
+    // PriorityBlockingQueue to prioritize logs based on priority
+    private final BlockingQueue<LogTask> logQueue = new PriorityBlockingQueue<>();
+
+    // Producer method to enqueue a task
+    public void produceLog(String message, int priority) {
+        logQueue.offer(new LogTask(message, priority));
+    }
+
+    // Consumer method to dequeue the highest priority task
+    public LogTask consumeLog() throws InterruptedException {
+        return logQueue.take();  // blocking call
+    }
+
+    // Inner class representing a log task with comparable priority
+    public static class LogTask implements Comparable<LogTask> {
+        private final String message;
+        private final int priority; // lower value = higher priority
+
+        public LogTask(String message, int priority) {
+            this.message = message;
+            this.priority = priority;
+        }
+
+        public String getMessage() {
+            return message;
+        }
+
+        public int getPriority() {
+            return priority;
+        }
+
+        @Override
+        public int compareTo(LogTask other) {
+            return Integer.compare(this.priority, other.priority);
+        }
+    }
+}

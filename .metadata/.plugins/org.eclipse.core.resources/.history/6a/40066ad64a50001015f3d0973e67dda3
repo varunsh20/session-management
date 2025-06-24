@@ -1,0 +1,5 @@
+package com.session.db;
+
+public class HikariMonitor {
+
+}

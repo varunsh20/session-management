@@ -1,0 +1,58 @@
+package com.session.concurrency;
+
+import java.util.concurrent.*;
+
+class LogTask implements Comparable<LogTask> {
+    String message;
+    int priority; 
+
+    LogTask(String message, int priority) {
+        this.message = message;
+        this.priority = priority;
+    }
+
+    @Override
+    public int compareTo(LogTask other) {
+        return Integer.compare(this.priority, other.priority);
+    }
+}
+
+class PriorityLogProcessor {
+    private final BlockingQueue<LogTask> queue = new PriorityBlockingQueue<>();
+
+    public void produce(LogTask task) {
+        queue.offer(task);
+    }
+
+    public LogTask consume() throws InterruptedException {
+        return queue.take();
+    }
+}
+
+class Producer extends Thread {
+    private final PriorityLogProcessor processor;
+    Producer(PriorityLogProcessor processor) { this.processor = processor; }
+
+    public void run() {
+        for (int i = 0; i < 100; i++) {
+            int priority = i % 3;
+            processor.produce(new LogTask("Log " + i, priority));
+        }
+    }
+}
+
+class Consumer extends Thread {
+    private final PriorityLogProcessor processor;
+    Consumer(PriorityLogProcessor processor) { this.processor = processor; }
+
+    public void run() {
+        try {
+            while (true) {
+                LogTask task = processor.consume();
+                System.out.println("Consumed [" + task.priority + "]: " + task.message);
+            }
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+    }
+}

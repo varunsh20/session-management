@@ -1,0 +1,9 @@
+/Users/varun/Documents/workspace-spring-tools-for-eclipse-4.31.0.RELEASE/session-management/src/main/java/com/session/SessionManagementApplication.java
+/Users/varun/Documents/workspace-spring-tools-for-eclipse-4.31.0.RELEASE/session-management/src/main/java/com/session/concurrency/Consumer.java
+/Users/varun/Documents/workspace-spring-tools-for-eclipse-4.31.0.RELEASE/session-management/src/main/java/com/session/concurrency/LogProcessor.java
+/Users/varun/Documents/workspace-spring-tools-for-eclipse-4.31.0.RELEASE/session-management/src/main/java/com/session/concurrency/Producer.java
+/Users/varun/Documents/workspace-spring-tools-for-eclipse-4.31.0.RELEASE/session-management/src/main/java/com/session/db/DatabaseManager.java
+/Users/varun/Documents/workspace-spring-tools-for-eclipse-4.31.0.RELEASE/session-management/src/main/java/com/session/db/HikariMonitor.java
+/Users/varun/Documents/workspace-spring-tools-for-eclipse-4.31.0.RELEASE/session-management/src/main/java/com/session/deadlock/DeadlockSimulator.java
+/Users/varun/Documents/workspace-spring-tools-for-eclipse-4.31.0.RELEASE/session-management/src/main/java/com/session/manager/SessionManager.java
+/Users/varun/Documents/workspace-spring-tools-for-eclipse-4.31.0.RELEASE/session-management/src/main/java/com/session/memory/MemoryManager.java

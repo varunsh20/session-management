@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="org.eclipse.m2e.Maven2LaunchConfigurationType">
+    <booleanAttribute key="M2_BATCH" value="false"/>
+    <stringAttribute key="M2_GOALS" value="-U archetype:generate"/>
+    <listAttribute key="M2_PROPERTIES">
+        <listEntry value="camel-version=2.25.4"/>
+        <listEntry value="exec-maven-plugin-version=1.6.0"/>
+        <listEntry value="maven-compiler-plugin-version=3.8.0"/>
+        <listEntry value="maven-eclipse-plugin-version=2.10"/>
+        <listEntry value="maven-resources-plugin-version=3.0.2"/>
+        <listEntry value="archetypeGroupId=org.apache.camel.archetypes"/>
+        <listEntry value="archetypeArtifactId=camel-archetype-groovy"/>
+        <listEntry value="archetypeVersion=2.25.4"/>
+        <listEntry value="groupId=com.session"/>
+        <listEntry value="artifactId=management"/>
+        <listEntry value="version=0.0.1-SNAPSHOT"/>
+        <listEntry value="package=com.session.management"/>
+        <listEntry value="outputDirectory=/Users/varun/Documents/workspace-spring-tools-for-eclipse-4.31.0.RELEASE"/>
+    </listAttribute>
+    <booleanAttribute key="M2_SAVE_BEFORE_LAUNCH" value="false"/>
+    <booleanAttribute key="org.eclipse.debug.ui.private" value="true"/>
+    <stringAttribute key="org.eclipse.jdt.launching.WORKING_DIRECTORY" value="/var/folders/s4/jm9lp07d0_g15yxxtvhms2jw0000gn/T/m2e-archetypeGenerator5832668025379940772"/>
+</launchConfiguration>

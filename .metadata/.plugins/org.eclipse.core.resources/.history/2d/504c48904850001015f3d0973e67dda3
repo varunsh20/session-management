@@ -1,0 +1,104 @@
+package com.session.concurrency;
+
+import java.util.concurrent.*;
+
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.PriorityBlockingQueue;
+
+public class LogProcessor {
+
+    // LogTask class with priority
+    static class LogTask implements Comparable<LogTask> {
+        private final String message;
+        private final int priority; // Lower number = higher priority
+
+        public LogTask(String message, int priority) {
+            this.message = message;
+            this.priority = priority;
+        }
+
+        public String getMessage() {
+            return message;
+        }
+
+        public int getPriority() {
+            return priority;
+        }
+
+        @Override
+        public int compareTo(LogTask other) {
+            return Integer.compare(this.priority, other.priority);
+        }
+    }
+
+    // Priority-based queue
+    private final BlockingQueue<LogTask> logQueue = new PriorityBlockingQueue<>();
+
+    // Producer thread
+    class Producer extends Thread {
+        private final int id;
+
+        Producer(int id) {
+            this.id = id;
+        }
+
+        @Override
+        public void run() {
+            for (int i = 0; i < 30; i++) {
+                int priority = (i % 5 == 0) ? 1 : 5; // Every 5th log is high priority
+                String message = "Producer-" + id + " Log-" + i;
+                produceLog(message, priority);
+                try {
+                    Thread.sleep(50); // Simulate log delay
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                }
+            }
+        }
+    }
+
+    // Consumer thread
+    class Consumer extends Thread {
+        private final int id;
+
+        Consumer(int id) {
+            this.id = id;
+        }
+
+        @Override
+        public void run() {
+            try {
+                while (true) {
+                    LogTask task = consumeLog();
+                    System.out.println("Consumer-" + id + " processed [Priority " + task.getPriority() + "]: " + task.getMessage());
+                    Thread.sleep(100); // Simulate processing delay
+                }
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+        }
+    }
+
+    // Producer method
+    public void produceLog(String message, int priority) {
+        logQueue.offer(new LogTask(message, priority));
+    }
+
+    // Consumer method
+    public LogTask consumeLog() throws InterruptedException {
+        return logQueue.take(); // Blocking call
+    }
+
+    // Main method to run the app
+    public static void main(String[] args) {
+        LogProcessor processor = new LogProcessor();
+
+        // Start multiple producers
+        processor.new Producer(1).start();
+        processor.new Producer(2).start();
+
+        // Start multiple consumers
+        processor.new Consumer(1).start();
+        processor.new Consumer(2).start();
+    }
+}
